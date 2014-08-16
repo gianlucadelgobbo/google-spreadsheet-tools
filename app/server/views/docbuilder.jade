@@ -1,0 +1,64 @@
+form(method="post").form-horizontal#myform
+	.well
+		// store the userId on the client side in a hidden input field //
+		- if (typeof msg !== "undefined" && typeof msg.e !== "undefined" && msg.e.length)
+			.alert.alert-danger
+				h4="There are some errors"
+				ul
+					- for(a=0;a<msg.e.length;a++)
+						li=msg.e[a].m
+		- if (typeof msg !== "undefined" && typeof msg.c !== "undefined" && msg.c.length)
+			.alert.alert-success
+				h4="There are some messages"
+				ul
+					- for(a=0;a<msg.c.length;a++)
+						li=msg.c[a].m
+		- if (typeof(fields)!=="undefined")
+			div.row
+				div.col-sm-6
+					p
+						label(for='spreadsheet_key')="Spreadsheet Key"
+						input(type="text",placeholder="Spreadsheet Key", value=post.spreadsheet_key ? post.spreadsheet_key : '0AnhKUiD4D-TbdG5OTkFKRWF6aUhETzU2RVhZUUdQU2c', name='spreadsheet_key')#spreadsheet_key.form-control
+					p
+						label(for='email')="Email"
+						input(type="email",placeholder="Email", value=post.email ? post.email : 'g.delgobbo@flyer.it', name='email')#email.form-control
+					p
+						label(for='password')="Password"
+						input(type="password",placeholder="Password", name='password', value=post.password ? post.password : '')#password.form-control
+				div.col-sm-6
+					ol
+						- each field in fields
+							li=field
+
+			p
+				label(for='mytext')="My text"
+				textarea(rows="30",name="mytext")#mytext.form-control=(post.mytext ? post.mytext : '')
+			div.text-center
+				button(type='submit').btn.btn-success="Show"
+		- else
+			div.row
+				div.col-sm-6.col-sm-offset-3
+					p
+						label(for='spreadsheet_key')="Spreadsheet Key"
+						input(type="text",placeholder="Spreadsheet Key", value=post.spreadsheet_key ? post.spreadsheet_key : '0AnhKUiD4D-TbdG5OTkFKRWF6aUhETzU2RVhZUUdQU2c', name='spreadsheet_key')#spreadsheet_key.form-control
+					p
+						label(for='email')="Email"
+						input(type="email",placeholder="Email", value=post.email ? post.email : 'g.delgobbo@flyer.it', name='email')#email.form-control
+					p
+						label(for='password')="Password"
+						input(type="password",placeholder="Password", name='password', value=post.password ? post.password : '')#password.form-control
+			div.text-center
+				button(type='submit').btn.btn-success="GET DATA"
+form(method="post", action="/composer").form-horizontal#myform
+	- if (results.length)
+		div
+			- strA = []
+			each item in results
+				div=item
+br
+
+
+
+
+
+
