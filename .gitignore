@@ -1,0 +1,6 @@
+.DS_Store
+err.log
+forever.log
+node_modules
+out.log
+.idea
