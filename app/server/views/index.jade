@@ -18,7 +18,7 @@ form(method="post").form-horizontal#myform
 				div.col-sm-6
 					p
 						label(for='spreadsheet_key')="Spreadsheet Key"
-						input(type="text",placeholder="Spreadsheet Key", value=post.spreadsheet_key ? post.spreadsheet_key : '0AnhKUiD4D-TbdG5OTkFKRWF6aUhETzU2RVhZUUdQU2c', name='spreadsheet_key')#spreadsheet_key.form-control
+						input(type="text",placeholder="Spreadsheet Key", value=typeof(post.spreadsheet_key)!=="undefined" ? post.spreadsheet_key : '0AnhKUiD4D-TbdG5OTkFKRWF6aUhETzU2RVhZUUdQU2c', name='spreadsheet_key')#spreadsheet_key.form-control
 					p
 						label(for='email')="Email"
 						input(type="email",placeholder="Email", value=post.email ? post.email : 'g.delgobbo@flyer.it', name='email')#email.form-control
@@ -47,17 +47,17 @@ form(method="post").form-horizontal#myform
 				div.col-sm-6.col-sm-offset-3
 					p
 						label(for='spreadsheet_key')="Spreadsheet Key"
-						input(type="text",placeholder="Spreadsheet Key", value=post.spreadsheet_key ? post.spreadsheet_key : '0AnhKUiD4D-TbdG5OTkFKRWF6aUhETzU2RVhZUUdQU2c', name='spreadsheet_key')#spreadsheet_key.form-control
+						input(type="text",placeholder="Spreadsheet Key", value=typeof(post)!=="undefined" && typeof(post.spreadsheet_key)!=="undefined" ? post.spreadsheet_key : '0AnhKUiD4D-TbdG5OTkFKRWF6aUhETzU2RVhZUUdQU2c', name='spreadsheet_key')#spreadsheet_key.form-control
 					p
 						label(for='email')="Email"
-						input(type="email",placeholder="Email", value=post.email ? post.email : 'g.delgobbo@flyer.it', name='email')#email.form-control
+						input(type="email",placeholder="Email", value=typeof(post)!=="undefined" && typeof(post.email) ? post.email : 'g.delgobbo@flyer.it', name='email')#email.form-control
 					p
 						label(for='password')="Password"
-						input(type="password",placeholder="Password", name='password', value=post.password ? post.password : '')#password.form-control
+						input(type="password",placeholder="Password", name='password', value=typeof(post)!=="undefined" && typeof(post.password) ? post.password : '')#password.form-control
 			div.text-center
 				button(type='submit').btn.btn-success="GET DATA"
 form(method="post", action="/composer").form-horizontal#myform
-	- if (results.length)
+	- if (typeof(post)!=="undefined" && typeof(results.length)!=="undefined")
 		ol
 			- strA = []
 			each item in results
