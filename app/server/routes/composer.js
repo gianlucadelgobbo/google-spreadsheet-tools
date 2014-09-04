@@ -1,12 +1,8 @@
-var CT = require('../modules/country-list');
-var EM = require('../modules/email-dispatcher');
-var emails = {Samuele:'s.huynhhong@liveperformersmeeting.net', Gianluca:'g.delgobbo@liveperformersmeeting.net', Chiara:'c.gianniniguazzugli@liveperformersmeeting.net', Fax:'a.familari@liveperformersmeeting.net', Carlotta:'c.piccinini@liveperformersmeeting.net'}
-var passwords = {Samuele:'s.huynhhong@liveperformersmeeting.net', Gianluca:'22724gia', Chiara:'c.gianniniguazzugli@liveperformersmeeting.net', Fax:'a.familari@liveperformersmeeting.net', Carlotta:'c.piccinini@liveperformersmeeting.net'}
-var signature = "\n______________________________________\nLPM - Live Performers Meeting\nliveperformersmeeting.net\nVia del Verano 39 - 00185 Rome\nTel. +39 06 78147301 Fax +39 06 78390805"
+var signature = "\n______________________________________\nLPM - Live Performers Meeting\nliveperformersmeeting.net\nVia del Verano 39 - 00185 Rome\nTel. +39 06 78147301 Fax +39 06 78390805";
 
 
 exports.get = function get(req, res) {
-	res.render('composer', { locals: {title:"Partners Manager",post:[],results:[],failed:[[],[]], success:[[],[]] }});
+	res.render('composer', {title:"Google Spreadsheet Tools",post:[],results:[],failed:[[],[]], success:[[],[]] });
 };
 exports.post = function get(req, res) {
 	// console.log(res);
@@ -14,11 +10,11 @@ exports.post = function get(req, res) {
 	// # is worksheet id - IDs start at 1
 	// console.log( req.body);
 	if (req.body.to && (req.body.message_it || req.body.message_en)) {
-		var rows = {}
-		var items = JSON.parse(req.body.to)
+		var rows = {};
+		var items = JSON.parse(req.body.to);
 		for(var a=0;a<items.length;a++){
 			var i = items[a][1]+"_"+items[a][4];
-			if (typeof(rows[i])=="undefined") rows[i] = {}
+			if (typeof(rows[i])=="undefined") rows[i] = {};
 			rows[i].from = req.body.from_name+" <"+req.body.from_email+">";
 			rows[i].to = items[a][2]+" "+items[a][3]+" <"+items[a][4]+">";
 			rows[i].from_html = req.body.from_name+" &lt;"+req.body.from_email+"&gt;";
@@ -36,9 +32,9 @@ exports.post = function get(req, res) {
 		}
 		var rowsA = [];
 		for(var b in rows) rowsA.push(rows[b]);
-		res.render('composer', { locals: {title:"Partners Manager",post:req.body,results:rowsA,failed:[[],[]], success:[[],[]] }});
+		res.render('composer', {title:"Google Spreadsheet Tools",post:req.body,results:rowsA,failed:[[],[]], success:[[],[]] });
 	} else {
-		res.render('composer', { locals: {title:"Partners Manager",post:req.body,results:[],failed:[[],[]], success:[[],[]] }});
+		res.render('composer', {title:"Google Spreadsheet Tools",post:req.body,results:[],failed:[[],[]], success:[[],[]] });
 	}
 	/*
 	my_sheet.getRows( 1, function(err, row_data){

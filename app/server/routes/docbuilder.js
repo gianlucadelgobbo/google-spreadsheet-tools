@@ -1,13 +1,9 @@
-var CT = require('../modules/country-list');
 var GoogleSpreadsheet = require("google-spreadsheet");
-var EM = require('../modules/email-dispatcher');
-var emails = {Samuele:'s.huynhhong@liveperformersmeeting.net', Gianluca:'g.delgobbo@liveperformersmeeting.net', Chiara:'c.gianniniguazzugli@liveperformersmeeting.net', Fax:'a.familari@liveperformersmeeting.net', Carlotta:'c.piccinini@liveperformersmeeting.net'}
-var passwords = {Samuele:'s.huynhhong@liveperformersmeeting.net', Gianluca:'22724gia', Chiara:'c.gianniniguazzugli@liveperformersmeeting.net', Fax:'a.familari@liveperformersmeeting.net', Carlotta:'c.piccinini@liveperformersmeeting.net'}
-var signature = "\n______________________________________\nLPM - Live Performers Meeting\nliveperformersmeeting.net\nVia del Verano 39 - 00185 Rome\nTel. +39 06 78147301 Fax +39 06 78390805"
+var signature = "\n______________________________________\nLPM - Live Performers Meeting\nliveperformersmeeting.net\nVia del Verano 39 - 00185 Rome\nTel. +39 06 78147301 Fax +39 06 78390805";
 var shortcode2 = require('mpm.shortcode');
 
 exports.get = function get(req, res) {
-    res.render('docbuilder', { locals: {title:"Partners Manager",post:[],results:[]}});
+    res.render('docbuilder', {title:"Google Spreadsheet Tools",post:[],results:[]});
 };
 exports.post = function get(req, res) {
     var fields = {
@@ -16,7 +12,7 @@ exports.post = function get(req, res) {
         "surname": "",
         "email": "",
         "lang": ""
-    }
+    };
     // console.log(res);
     // without auth -- read only
     // # is worksheet id - IDs start at 1
@@ -42,10 +38,6 @@ exports.post = function get(req, res) {
                             for (var b = 0; b < shortCodesList.length; b++) {
                                 //console.log("AA "+shortCodesList[b]);
                                 myShortCodes.add(shortCodesList[b], function (attributes, content, context) {
-                                    console.log("BB a "+a);
-                                    console.log("BB b "+b);
-                                    console.log("BB c "+rows[a]);
-                                    console.log("BB d "+shortCodesList[b]);
                                     return rows[a][shortCodesList[b]];
                                 });
                                 string = myShortCodes.parse(string);
@@ -74,16 +66,9 @@ exports.post = function get(req, res) {
                         }
                         */
                         if (msg.e) {
-                            var fields = {
-                                "display_name": "",
-                                "name": "",
-                                "surname": "",
-                                "email": "",
-                                "lang": ""
-                            }
-                            res.render('docbuilder', { locals: {msg:msg,title:"Partners Manager",post:req.body,fields:Object.keys( rows[0] ),results:[]}});
+                            res.render('docbuilder', {msg:msg,title:"Google Spreadsheet Tools",post:req.body,fields:Object.keys( rows[0] ),results:[]});
                         } else {
-                            res.render('docbuilder', { locals: {title: "Partners Manager", post: req.body,fields:Object.keys( rows[0] ), results: results }});
+                            res.render('docbuilder', {title:"Google Spreadsheet Tools", post: req.body,fields:Object.keys( rows[0] ), results: results });
                             //rows[0].colname = 'new val';
                             //rows[0].save();
                             //rows[0].del();
@@ -99,7 +84,7 @@ exports.post = function get(req, res) {
                     sheet_info.worksheets[0].getRows( function( err, rows ){
                         console.log( Object.keys(fields));
                         console.log( Object.keys( rows[0] ));
-                        res.render('docbuilder', { locals: {title:"Partners Manager",post:req.body,fields:Object.keys( rows[0] ),results:[]}});
+                        res.render('docbuilder', {title:"Google Spreadsheet Tools",post:req.body,fields:Object.keys( rows[0] ),results:[]});
                         //rows[0].colname = 'new val';
                         //rows[0].save();
                         //rows[0].del();
@@ -108,7 +93,7 @@ exports.post = function get(req, res) {
             });
         }
     } else {
-        res.render('docbuilder', { locals: {title:"Partners Manager",post:req.body,results:[],failed:[[],[]], success:[[],[]] }});
+        res.render('docbuilder', {title:"Google Spreadsheet Tools",post:req.body,results:[],failed:[[],[]], success:[[],[]] });
     }
     /*
      my_sheet.getRows( 1, function(err, row_data){

@@ -21,5 +21,5 @@ exports.post = function post(req, res) {
     });
 };
 exports.get = function get(req, res) {
-    res.render('index', { locals: {title:"Partners Manager",post:[],results:[],failed:[[],[]], success:[[],[]] }});
+    res.render('index', { locals: {title:"Google Spreadsheet Tools",post:[],results:[],failed:[[],[]], success:[[],[]] }});
 };

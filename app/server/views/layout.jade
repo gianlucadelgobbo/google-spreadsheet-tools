@@ -1,4 +1,4 @@
-!!!
+doctype html
 html
 	head
 		title=title
@@ -23,10 +23,13 @@ html
 						li
 							a(href="/")="Home"
 						li
-							a(href="/")="From spreadsheet"
+							a(href="/")="Email from spreadsheet"
 						li
-							a(href="/composer")="Manually"
-		.container!= body
+							a(href="/composer")="Manual Email"
+						li
+							a(href="/docbuilder")="Doc Builder from spreadsheet"
+		.container
+			block content
 		
 		//include modals/alert
 		//include modals/confirm

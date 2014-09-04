@@ -1,7 +1,7 @@
 {
   "name": "google-spreadsheet-tools",
   "version": "0.0.0",
-  "description": "open-source partners manager system build on node.js",
+  "description": "open-source google sheets tools build on node.js",
   "main": "app.js",
   "dependencies": {
     "emailjs": "^0.3.11",
@@ -9,7 +9,9 @@
     "google-spreadsheet": "^0.2.8",
     "jade": "^1.6.0",
     "mpm.shortcode": "0.0.22",
-    "stylus": "^0.48.1"
+    "stylus": "^0.48.1",
+    "body-parser": "^1.7.0",
+    "method-override": "^2.2.0"
   },
   "devDependencies": {},
   "scripts": {

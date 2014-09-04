@@ -1,13 +1,9 @@
-var CT = require('../modules/country-list');
 var GoogleSpreadsheet = require("google-spreadsheet");
-var EM = require('../modules/email-dispatcher');
-var emails = {Samuele:'s.huynhhong@liveperformersmeeting.net', Gianluca:'g.delgobbo@liveperformersmeeting.net', Chiara:'c.gianniniguazzugli@liveperformersmeeting.net', Fax:'a.familari@liveperformersmeeting.net', Carlotta:'c.piccinini@liveperformersmeeting.net'}
-var passwords = {Samuele:'s.huynhhong@liveperformersmeeting.net', Gianluca:'22724gia', Chiara:'c.gianniniguazzugli@liveperformersmeeting.net', Fax:'a.familari@liveperformersmeeting.net', Carlotta:'c.piccinini@liveperformersmeeting.net'}
-var signature = "\n______________________________________\nLPM - Live Performers Meeting\nliveperformersmeeting.net\nVia del Verano 39 - 00185 Rome\nTel. +39 06 78147301 Fax +39 06 78390805"
+var signature = "\n______________________________________\nLPM - Live Performers Meeting\nliveperformersmeeting.net\nVia del Verano 39 - 00185 Rome\nTel. +39 06 78147301 Fax +39 06 78390805";
 
 
 exports.get = function get(req, res) {
-    res.render('index', { locals: {title:"Partners Manager",post:[],results:[],failed:[[],[]], success:[[],[]] }});
+    res.render('index', {title:"Google Spreadsheet Tools",post:[],results:[],failed:[[],[]], success:[[],[]] });
 };
 exports.post = function get(req, res) {
     var fields = {
@@ -16,7 +12,7 @@ exports.post = function get(req, res) {
         "surname": "",
         "email": "",
         "lang": ""
-    }
+    };
 	// console.log(res);
 	// without auth -- read only
 	// # is worksheet id - IDs start at 1
@@ -26,7 +22,7 @@ exports.post = function get(req, res) {
         if (req.body.associate) {
             my_sheet.setAuth(req.body.email,req.body.password, function(err){
                 my_sheet.getInfo( function( err, sheet_info ){
-                    console.log( sheet_info.title + ' is loaded' );
+                    //console.log( sheet_info.title + ' is loaded' );
                     // use worksheet object if you want to forget about ids
                     sheet_info.worksheets[0].getRows( function( err, rows ){
                         var msg = {};
@@ -46,23 +42,24 @@ exports.post = function get(req, res) {
                             if (!msg.e) msg.e = [];
                             msg.e.push({m:"Please associate email to a spreadsheet column"})
                         }
+                        var fields;
                         if (msg.e) {
-                            var fields = {
+                            fields = {
                                 "display_name": "",
                                 "name": "",
                                 "surname": "",
                                 "email": "",
                                 "lang": ""
-                            }
-                            res.render('index', { locals: {msg:msg,title:"Partners Manager",post:req.body,associate:{fields:Object.keys(fields),values:Object.keys( rows[0] )},results:[],failed:[[],[]], success:[[],[]] }});
+                            };
+                            res.render('index', {msg:msg,title:"Google Spreadsheet Tools",post:req.body,associate:{fields:Object.keys(fields),values:Object.keys( rows[0] )},results:[],failed:[[],[]], success:[[],[]] });
                         } else {
-                            var fields = {
+                            fields = {
                                 "display_name": "",
                                 "name": "",
                                 "surname": "",
                                 "email": "",
                                 "lang": ""
-                            }
+                            };
                             // console.log( err);
                             // console.log( rows);
                             var to = [];
@@ -70,24 +67,24 @@ exports.post = function get(req, res) {
                             for (var a = 0; a < rows.length; a++) {
                                 if (rows[a][req.body.associate.email] && exclude.indexOf(rows[a][req.body.associate.email].toLowerCase()) == -1) {
                                     //rows[a].from = rows[a].person+" <"+emails[rows[a].person]+">";
-                                    var fields = {
+                                    fields = {
                                         "display_name": rows[a][req.body.associate.display_name],
                                         "name": rows[a][req.body.associate.name],
                                         "surname": rows[a][req.body.associate.surname],
                                         "email": rows[a][req.body.associate.email]
-                                    }
+                                    };
                                     fields.lang = (req.body.associate.lang && rows[a][req.body.associate.lang] ? rows[a][req.body.associate.lang] : "en");
                                     to.push(fields);
-                                    console.log(fields);
+                                    //console.log(fields);
                                 }
                             }
-                            res.render('index', { locals: {title: "Partners Manager", post: req.body, associate: {fields: Object.keys(fields), values: Object.keys(rows[0])}, results: to, failed: [
+                            res.render('index', {title:"Google Spreadsheet Tools", post: req.body, associate: {fields: Object.keys(fields), values: Object.keys(rows[0])}, results: to, failed: [
                                 [],
                                 []
                             ], success: [
                                 [],
                                 []
-                            ] }});
+                            ] });
                             //rows[0].colname = 'new val';
                             //rows[0].save();
                             //rows[0].del();
@@ -98,12 +95,12 @@ exports.post = function get(req, res) {
         } else {
             my_sheet.setAuth(req.body.email,req.body.password, function(err){
                 my_sheet.getInfo( function( err, sheet_info ){
-                    console.log( sheet_info.title + ' is loadedaaaaa' );
+                    //console.log( sheet_info.title + ' is loadedaaaaa' );
                     // use worksheet object if you want to forget about ids
                     sheet_info.worksheets[0].getRows( function( err, rows ){
-                        console.log( Object.keys(fields));
-                        console.log( Object.keys( rows[0] ));
-                        res.render('index', { locals: {title:"Partners Manager",post:req.body,associate:{fields:Object.keys(fields),values:Object.keys( rows[0] )},results:[],failed:[[],[]], success:[[],[]] }});
+                        //console.log( Object.keys(fields));
+                        //console.log( Object.keys( rows[0] ));
+                        res.render('index', {title:"Google Spreadsheet Tools",post:req.body,associate:{fields:Object.keys(fields),values:Object.keys( rows[0] )},results:[],failed:[[],[]], success:[[],[]] });
                         //rows[0].colname = 'new val';
                         //rows[0].save();
                         //rows[0].del();
@@ -112,7 +109,7 @@ exports.post = function get(req, res) {
             });
         }
     } else {
-	    res.render('index', { locals: {title:"Partners Manager",post:req.body,results:[],failed:[[],[]], success:[[],[]] }});
+	    res.render('index', {title:"Google Spreadsheet Tools",post:req.body,results:[],failed:[[],[]], success:[[],[]] });
 	}
 	/*
 	my_sheet.getRows( 1, function(err, row_data){

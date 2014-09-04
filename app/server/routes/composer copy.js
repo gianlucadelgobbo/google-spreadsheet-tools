@@ -1,13 +1,11 @@
 var CT = require('../modules/country-list');
 var GoogleSpreadsheet = require("google-spreadsheet");
 var EM = require('../modules/email-dispatcher');
-var emails = {Samuele:'s.huynhhong@liveperformersmeeting.net', Gianluca:'g.delgobbo@liveperformersmeeting.net', Chiara:'c.gianniniguazzugli@liveperformersmeeting.net', Fax:'a.familari@liveperformersmeeting.net', Carlotta:'c.piccinini@liveperformersmeeting.net'}
-var passwords = {Samuele:'s.huynhhong@liveperformersmeeting.net', Gianluca:'22724gia', Chiara:'c.gianniniguazzugli@liveperformersmeeting.net', Fax:'a.familari@liveperformersmeeting.net', Carlotta:'c.piccinini@liveperformersmeeting.net'}
 var signature = "\n______________________________________\nLPM - Live Performers Meeting\nliveperformersmeeting.net\nVia del Verano 39 - 00185 Rome\nTel. +39 06 78147301 Fax +39 06 78390805"
 
 
 exports.get = function get(req, res) {
-    res.render('spreadsheet', { locals: {title:"Partners Manager", countries : CT},post:[],results:[],failed:[[],[]], success:[[],[]] });
+    res.render('spreadsheet', { locals: {title:"Google Spreadsheet Tools", countries : CT},post:[],results:[],failed:[[],[]], success:[[],[]] });
 };
 exports.post = function get(req, res) {
 	// console.log(res);
@@ -65,7 +63,7 @@ exports.post = function get(req, res) {
 										success[1].push(item.name+" "+item.surname+"	"+item.name+"	"+item.surname+"	"+item['e-mail']+"");
 									}
 									if (index==to.length-1) {
-    									res.render('spreadsheet', { locals: {title:"Partners Manager", countries : CT},post:req.body,results:to,failed:failed, success:success});
+    									res.render('spreadsheet', { locals: {title:"Google Spreadsheet Tools", countries : CT},post:req.body,results:to,failed:failed, success:success});
 									}
 								});
 							} 
@@ -82,7 +80,7 @@ exports.post = function get(req, res) {
 						}
 						*/
 				    } else {
-		    			res.render('spreadsheet', { locals: {title:"Partners Manager", countries : CT},post:req.body,results:to,failed:[[],[]], success:[[],[]] });
+		    			res.render('spreadsheet', { locals: {title:"Google Spreadsheet Tools", countries : CT},post:req.body,results:to,failed:[[],[]], success:[[],[]] });
 				    }
 		            //rows[0].colname = 'new val';
 		            //rows[0].save();
@@ -91,7 +89,7 @@ exports.post = function get(req, res) {
 		    });
 		});
 	} else {
-	    res.render('spreadsheet', { locals: {title:"Partners Manager", countries : CT},post:req.body,results:[],failed:[[],[]], success:[[],[]] });
+	    res.render('spreadsheet', { locals: {title:"Google Spreadsheet Tools", countries : CT},post:req.body,results:[],failed:[[],[]], success:[[],[]] });
 	}
 	/*
 	my_sheet.getRows( 1, function(err, row_data){
