@@ -1,17 +1,15 @@
 {
-  "name": "mongo-invoices",
+  "name": "google-spreadsheet-tools",
   "version": "0.0.0",
-  "description": "open-source partners manager system build on node.js and mongodb",
+  "description": "open-source partners manager system build on node.js",
   "main": "app.js",
   "dependencies": {
-    "emailjs": "~0.3.2",
-    "express": "~2.5.11",
-    "jade": "~0.27.5",
-    "moment": "~1.7.0",
-    "stylus": "~0.29.0",
-    "google-spreadsheet": "~0.2.6",
-    "google-spreadsheets": "~0.3.0",
-    "googleclientlogin": "~0.2.6"
+    "emailjs": "^0.3.11",
+    "express": "^4.8.7",
+    "google-spreadsheet": "^0.2.8",
+    "jade": "^1.6.0",
+    "mpm.shortcode": "0.0.22",
+    "stylus": "^0.48.1"
   },
   "devDependencies": {},
   "scripts": {
@@ -19,15 +17,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/gianlucadelgobbo/partners-manager.git"
+    "url": "git://github.com/gianlucadelgobbo/google-spreadsheet-tools.git"
   },
   "keywords": [
-    "partners-manager",
-    "mongodb",
+    "google-spreadsheet-tools",
     "node.js"
   ],
   "author": "Gianluca Del Gobbo <g.delgobbo@flyer.it>",
   "license": "BSD",
   "readmeFilename": "README.md",
-  "private": true
+  "private": false
 }
