@@ -69,6 +69,8 @@ block content
 							p=item.msg
 							p!="From: <b>"+item.from_html+"</b>"
 							p!="To: <b>"+item.to_html+"</b>"
+							- if (item.cc_html)
+								p!="CC: <b>"+item.cc_html+"</b>"
 							p!="Subject: <b>"+item.subject+"</b>"
 							p="Message:"
 								pre=item.message
