@@ -34,6 +34,7 @@ exports.post = function get(req, res) {
 				
 			}
 		}
+        console.log(rows);
 		var rowsA = [];
 		for(var b in rows) rowsA.push(rows[b]);
 		res.render('composer', {title:"Google Spreadsheet Tools",post:req.body,results:rowsA,failed:[[],[]], success:[[],[]] });

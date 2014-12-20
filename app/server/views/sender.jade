@@ -1,9 +1,5 @@
 extends layout
 block content
-	- var basetitle = "LPM 2014";
-	//- var basetitle = "AVnode.net";
-	script
-		var basetitle = "LPM 2014";
 	form(method="post", action="/composer").form-horizontal#myform
 		.well
 			// store the userId on the client side in a hidden input field //
@@ -23,13 +19,13 @@ block content
 				div.col-sm-6
 					p
 						label(for='from_name')="From name"
-						input(type="text",placeholder="From name", value=post.from_name ? post.from_name : 'Gianluca Del Gobbo', name='from_name')#from_name.form-control
+						input(type="text",placeholder="From name", value=typeof(post)!=="undefined" && post.from_name ? post.from_name : 'Gianluca Del Gobbo', name='from_name')#from_name.form-control
 					p
 						label(for='from_email')="From Email"
-						input(type="email",		placeholder="From Email",	name='from_email', 	 value=post.from_email ? post.from_email : 'g.delgobbo@flyer.it')#from_email.form-control
+						input(type="email",        placeholder="From Email",    name='from_email',     value=typeof(post)!=="undefined" && post.from_email ? post.from_email : 'g.delgobbo@flyer.it')#from_email.form-control
 					p
 						label(for='from_password')="From Password"
-						input(type="password",	placeholder="From Password",name='from_password',value=post.from_password ? post.from_password : '')#from_password.form-control
+						input(type="password",    placeholder="From Password",name='from_password',value=typeof(post)!=="undefined" && post.from_password ? post.from_password : '')#from_password.form-control
 				div.col-sm-6
 					p
 						label(for='subject_add')="Subject"
@@ -55,12 +51,9 @@ block content
 			- if ((typeof(failed)!=="undefined" ) && (typeof(success)!=="undefined") && (success[0].length || failed[0].length))
 				h1="Success"
 				textarea.form-control=success[0].length ? success[0].join(',') : ""
-				textarea.form-control=success[1].length ? success[1].join('\n') : ""
 				h1="Failed"
 				textarea.form-control=failed[0].length ? failed[0].join(',') : ""
-				textarea.form-control=failed[1].length ? failed[1].join('\n') : ""
-	form(method="post", action="/sender").form-horizontal#myform
-		- if (results.length)
+		- if (typeof(results)!=="undefined" && results.length)
 			input(type="hidden",value=0, name='send')#send
 			ol
 				each item in results
@@ -70,9 +63,11 @@ block content
 							p=item.msg
 							p!="From: <b>"+item.from_html+"</b>"
 							p!="To: <b>"+item.to_html+"</b>"
+							- if (item.cc_html)
+								p!="CC: <b>"+item.cc_html+"</b>"
 							p!="Subject: <b>"+item.subject+"</b>"
 							p="Message:"
-								pre=item["message_"+item.lang]
+								pre=item.message
 			div.row
 				div.col-sm-6
 					div.pull-right
@@ -80,12 +75,5 @@ block content
 							option(selected=post.realsend == 0, value=0)='Test send'
 							option(selected=post.realsend == 1, value=1)='Real send'
 				div.col-sm-6
-					button(type='button', onclick='jQuery( "#send" ).val(1);jQuery( "#myform" ).submit();').btn.btn-success="Send"
+					button(type='button', onclick='jQuery( "#myform" ).attr("action","/sender");jQuery( "#myform" ).submit();').btn.btn-success="Send"
 	<br />
-	//script(src='/js/client.js')
-
-
-
-
-
-

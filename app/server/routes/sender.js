@@ -17,9 +17,13 @@ exports.post = function get(req, res) {
 			var i = items[a][1]+"_"+items[a][4];
 			if (typeof(rows[i])=="undefined") rows[i] = {};
 			rows[i].from = req.body.from_name+" <"+req.body.from_email+">";
+            rows[i].from_html = req.body.from_name+" &lt;"+req.body.from_email+"&gt;";
 			rows[i].to = items[a][2]+" "+items[a][3]+" <"+items[a][4]+">";
-			rows[i].from_html = req.body.from_name+" &lt;"+req.body.from_email+"&gt;";
 			rows[i].to_html = items[a][2]+" "+items[a][3]+" &lt;"+items[a][4]+"&gt;";
+            if (items[a].length==8) {
+                rows[i].cc = items[a][5]+" "+items[a][6]+" <"+items[a][7]+">";
+                rows[i].cc_html = items[a][5]+" "+items[a][6]+" &lt;"+items[a][7]+"&gt;";
+            }
 			rows[i].subject = req.body.subject.replace('[org_name]',items[a][1]);
 			rows[i].lang = items[a][0];
 			rows[i].message = req.body["message_"+items[a][0]].replace('[name]',items[a][2]).replace('[signature]',req.body.from_name)+signature;
@@ -39,11 +43,12 @@ exports.post = function get(req, res) {
 		rowsA.forEach(function(item, index, theArray) {
 			if (item) {
 				EM.sendMail(item.server, {
-				   text:    item.message, 
-				   from:    item.from,
-				   //to:      ,
-				   to:      (req.body.realsend==1 ? item.to : item.from),
-				   subject: item.subject
+                    text:    item.message,
+                    from:    item.from,
+                    //to:      ,
+                    to:      (req.body.realsend==1 ? item.to : item.from),
+                    cc:      (req.body.realsend==1 ? item.cc : item.from),
+                    subject: item.subject
 				}, function(err, message) {
 					console.log(message);
 					rowsA[index].msg = err ? "Message NOT sent" : "Message sent";

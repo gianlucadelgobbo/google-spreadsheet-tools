@@ -1,9 +1,5 @@
 extends layout
 block content
-	- var basetitle = "";
-	//- var basetitle = "AVnode.net";
-	script.
-		var basetitle = "";
 	form(method="post", action="/composer").form-horizontal#myform
 		.well
 			// store the userId on the client side in a hidden input field //
@@ -55,10 +51,8 @@ block content
 			- if ((typeof(failed)!=="undefined" ) && (typeof(success)!=="undefined") && (success[0].length || failed[0].length))
 				h1="Success"
 				textarea.form-control=success[0].length ? success[0].join(',') : ""
-				textarea.form-control=success[1].length ? success[1].join('\n'): ""
 				h1="Failed"
 				textarea.form-control=failed[0].length ? failed[0].join(',') : ""
-				textarea.form-control=failed[1].length ? failed[1].join('\n') : ""
 		- if (typeof(results)!=="undefined" && results.length)
 			input(type="hidden",value=0, name='send')#send
 			ol
@@ -83,10 +77,3 @@ block content
 				div.col-sm-6
 					button(type='button', onclick='jQuery( "#myform" ).attr("action","/sender");jQuery( "#myform" ).submit();').btn.btn-success="Send"
 	<br />
-	//script(src='/js/client.js')
-
-
-
-
-
-
