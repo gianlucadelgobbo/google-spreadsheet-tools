@@ -29,9 +29,9 @@ block content
 				div.col-sm-6
 					p
 						label(for='subject_add')="Subject"
-						input(type="text",onkeyup="jQuery('#subject_preview').html('[org_name] | '+basetitle+' '+this.value);jQuery('#subject').val('[org_name] | '+basetitle+' '+this.value)",placeholder="Subject", value=typeof(post)!=="undefined" && post.subject_add ? post.subject_add : '', name='subject_add')#subject_add.form-control
-						b#subject_preview!="[org_name] | "+basetitle+" "+(typeof(post)!=="undefined" && post.subject_add ? post.subject_add : '')
-						input(type="hidden",value=typeof(post)!=="undefined" && post.subject ? post.subject : '[org_name] | '+basetitle+' ', name='subject')#subject
+						input(type="text",onkeyup="jQuery('#subject_preview').html('[org_name] | '+this.value);jQuery('#subject').val('[org_name] | '+this.value)",placeholder="Subject", value=typeof(post)!=="undefined" && post.subject_add ? post.subject_add : '', name='subject_add')#subject_add.form-control
+						b#subject_preview!="[org_name] | "+(typeof(post)!=="undefined" && post.subject_add ? post.subject_add : '')
+						input(type="hidden",value=typeof(post)!=="undefined" && post.subject ? post.subject : '[org_name] | ', name='subject')#subject
 			div.row
 				div.col-sm-12
 					p
