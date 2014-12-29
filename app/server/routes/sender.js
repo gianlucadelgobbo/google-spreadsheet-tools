@@ -9,12 +9,12 @@ exports.post = function get(req, res) {
 	// console.log(res);
 	// without auth -- read only
 	// # is worksheet id - IDs start at 1
-	console.log( req.body);
+	//console.log( req.body);
 	if (req.body.to && (req.body.message_it || req.body.message_en)) {
 		var rows = {};
 		var items = JSON.parse(req.body.to);
 		for(var a=0;a<items.length;a++){
-			var i = items[a][1]+"_"+items[a][4];
+			var i = a;
 			if (typeof(rows[i])=="undefined") rows[i] = {};
 			rows[i].from = req.body.from_name+" <"+req.body.from_email+">";
             rows[i].from_html = req.body.from_name+" &lt;"+req.body.from_email+"&gt;";
@@ -50,15 +50,15 @@ exports.post = function get(req, res) {
                     cc:      (req.body.realsend==1 ? item.cc : item.from),
                     subject: item.subject
 				}, function(err, message) {
-					console.log(message);
+					console.log(items[index]);
 					rowsA[index].msg = err ? "Message NOT sent" : "Message sent";
 					if (err) {
 						//failed[0].push(item.name+" "+item.surname+" <"+item['e-mail']+">");
 						//failed[1].push(item.name+" "+item.surname+"	"+item.name+"	"+item.surname+"	"+item['e-mail']+"");
-						failed[0].push(item.to);
+						failed[0].push('["'+items[index].join('","')+'"]');
 						failed[1].push(item.to);
 					} else {
-						success[0].push(item.to);
+						success[0].push('["'+items[index].join('","')+'"]');
 						success[1].push(item.to);
 					}
 					if (index==rowsA.length-1) {
