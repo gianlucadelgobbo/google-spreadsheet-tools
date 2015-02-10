@@ -26,7 +26,7 @@ exports.post = function get(req, res) {
             }
 			rows[i].subject = req.body.subject.replace('[org_name]',items[a][1]);
 			rows[i].lang = items[a][0];
-			rows[i].message = req.body["message_"+items[a][0]].replace('[name]',items[a][2]).replace('[signature]',req.body.from_name)+signature;
+            rows[i].message = req.body["message_"+items[a][0]].replace('[org_name]',items[a][1]).replace('[name]',items[a][2]).replace('[id]',items[a][items[a].length-2]).replace('[login]',items[a][items[a].length-1]).replace('[signature]',req.body.from_name)+signature;
 			rows[i].server = {
 				user:    req.body.from_email, 
 				password:req.body.from_password, 
