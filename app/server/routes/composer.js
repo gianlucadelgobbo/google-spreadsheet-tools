@@ -19,7 +19,7 @@ exports.post = function get(req, res) {
             rows[i].from_html = req.body.from_name+" &lt;"+req.body.from_email+"&gt;";
             rows[i].to = items[a][2]+" "+items[a][3]+" <"+items[a][4]+">";
             rows[i].to_html = items[a][2]+" "+items[a][3]+" &lt;"+items[a][4]+"&gt;";
-            if (items[a].length==8) {
+            if (items[a].length>=8) {
                 rows[i].cc = items[a][5]+" "+items[a][6]+" <"+items[a][7]+">";
                 rows[i].cc_html = items[a][5]+" "+items[a][6]+" &lt;"+items[a][7]+"&gt;";
             }

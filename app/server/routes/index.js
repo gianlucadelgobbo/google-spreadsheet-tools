@@ -7,10 +7,13 @@ exports.get = function get(req, res) {
 };
 exports.post = function get(req, res) {
     var fields = {
-        "display_name": "",
-        "name": "",
-        "surname": "",
-        "email": "",
+        "displayname": "",
+		"name": "",
+		"surname": "",
+		"email": "",
+		"ccname": "",
+		"ccsurname": "",
+		"ccemail": "",
         "lang": ""
     };
 	// console.log(res);
@@ -26,7 +29,7 @@ exports.post = function get(req, res) {
                     // use worksheet object if you want to forget about ids
                     sheet_info.worksheets[0].getRows( function( err, rows ){
                         var msg = {};
-                        if (!req.body.associate.display_name || req.body.associate.display_name == "Please select"){
+                        if (!req.body.associate.displayname || req.body.associate.displayname == "Please select"){
                             if (!msg.e) msg.e = [];
                             msg.e.push({m:"Please associate display name to a spreadsheet column"})
                         }
@@ -42,42 +45,36 @@ exports.post = function get(req, res) {
                             if (!msg.e) msg.e = [];
                             msg.e.push({m:"Please associate email to a spreadsheet column"})
                         }
-                        var fields;
                         if (msg.e) {
-                            fields = {
-                                "display_name": "",
-                                "name": "",
-                                "surname": "",
-                                "email": "",
-                                "lang": ""
-                            };
                             res.render('index', {msg:msg,title:"Google Spreadsheet Tools",post:req.body,associate:{fields:Object.keys(fields),values:Object.keys( rows[0] )},results:[],failed:[[],[]], success:[[],[]] });
                         } else {
-                            fields = {
-                                "display_name": "",
-                                "name": "",
-                                "surname": "",
-                                "email": "",
-                                "lang": ""
-                            };
                             // console.log( err);
                             // console.log( rows);
                             var to = [];
                             var exclude = req.body.exclude.toLowerCase().split(",");
+							console.log(rows.length);
                             for (var a = 0; a < rows.length; a++) {
                                 if (rows[a][req.body.associate.email] && exclude.indexOf(rows[a][req.body.associate.email].toLowerCase()) == -1) {
                                     //rows[a].from = rows[a].person+" <"+emails[rows[a].person]+">";
-                                    fields = {
-                                        "display_name": rows[a][req.body.associate.display_name],
-                                        "name": rows[a][req.body.associate.name],
-                                        "surname": rows[a][req.body.associate.surname],
-                                        "email": rows[a][req.body.associate.email]
-                                    };
+									var fields = {
+										"displayname": "",
+										"name": "",
+										"surname": "",
+										"email": "",
+										"ccname": "",
+										"ccsurname": "",
+										"ccemail": "",
+										"lang": ""
+									};
+									for (var item in fields) {
+										console.log(item);
+										fields[item] = rows[a][req.body.associate[item]];
+									}
                                     fields.lang = (req.body.associate.lang && rows[a][req.body.associate.lang] ? rows[a][req.body.associate.lang] : "en");
                                     to.push(fields);
-                                    //console.log(fields);
                                 }
                             }
+							console.log(to);
                             res.render('index', {title:"Google Spreadsheet Tools", post: req.body, associate: {fields: Object.keys(fields), values: Object.keys(rows[0])}, results: to, failed: [
                                 [],
                                 []

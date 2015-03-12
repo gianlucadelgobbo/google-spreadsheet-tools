@@ -37,7 +37,7 @@ block content
 										select(onchange="",name="associate[#{ass}]").form-control
 											option="Please select"
 											- each key in associate.values
-												option(selected=(typeof(post)!=="undefined" && typeof(post.associate)!=="undefined" && post.associate[ass]==key ? "selected" : undefined))=key
+												option(selected=(ass==key ? "selected" : undefined))=key
 
 				p
 					label(for='exclude')="Exclude (emails comma delimited)"
@@ -63,8 +63,9 @@ block content
 			ol
 				- strA = []
 				each item in results
-					li='["'+item.lang+'","'+item.display_name+'","'+item.name+'","'+item.surname+'","'+item.email+'"]'
-					- strA.push('["'+item.lang+'","'+item.display_name+'","'+item.name+'","'+item.surname+'","'+item.email+'"]')
+					- var str = '["'+item.lang+'","'+item.displayname+'","'+item.name+'","'+item.surname+'","'+item.email+'"'+((item.ccname && item.ccsurname && item.ccemail) ? ',"'+item.ccname+'","'+item.ccsurname+'","'+item.ccemail+'"' : "")+']'
+					li=str
+					- strA.push(str)
 			textarea.form-control(name="to")
 				!= '['+strA.join()+']'
 			div.text-center
