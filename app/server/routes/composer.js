@@ -1,5 +1,7 @@
-var signature = "\n______________________________________\nLPM - Live Performers Meeting\nliveperformersmeeting.net\nVia del Verano 39 - 00185 Rome\nTel. +39 06 78147301 Fax +39 06 78390805";
-
+var signatures = {
+	"liveperformersmeeting.net": "\n______________________________________\nLPM - Live Performers Meeting\nliveperformersmeeting.net\nVia del Verano 39 - 00185 Rome\nTel. +39 06 78147301 Fax +39 06 78390805",
+	"avnode.org": "\n______________________________________\nAVnode\navnode.org - avnode.net"
+}
 
 exports.get = function get(req, res) {
 	res.render('composer', {title:"Google Spreadsheet Tools",post:[],results:[],failed:[[],[]], success:[[],[]] });
@@ -15,6 +17,7 @@ exports.post = function get(req, res) {
 		for(var a=0;a<items.length;a++){
 			var i = items[a][1]+"_"+items[a][4];
 			if (typeof(rows[i])=="undefined") rows[i] = {};
+			var signature = signatures[req.body.from_email.split("@")[1]];
 			rows[i].from = req.body.from_name+" <"+req.body.from_email+">";
             rows[i].from_html = req.body.from_name+" &lt;"+req.body.from_email+"&gt;";
             rows[i].to = items[a][2]+" "+items[a][3]+" <"+items[a][4]+">";
@@ -25,13 +28,21 @@ exports.post = function get(req, res) {
             }
 			rows[i].subject = req.body.subject.replace('[org_name]',items[a][1]);
 			rows[i].lang = items[a][0];
-			rows[i].message = req.body["message_"+items[a][0]].replace('[org_name]',items[a][1]).replace('[name]',items[a][2]).replace('[name]',items[a][2]).replace('[surname]',items[a][3]).replace('[id]',items[a][items[a].length-2]).replace('[login]',items[a][items[a].length-1]).replace('[signature]',req.body.from_name)+signature;
+			rows[i].message = req.body["message_"+items[a][0]];
+			if (rows[i].message.indexOf('[org_name]') 	&& items[a][1]) rows[i].message = rows[i].message.replace('[org_name]',items[a][1]);
+			if (rows[i].message.indexOf('[name]') 		&& items[a][2]) rows[i].message = rows[i].message.replace('[name]',items[a][2]);
+			if (rows[i].message.indexOf('[name]') 		&& items[a][2]) rows[i].message = rows[i].message.replace('[name]',items[a][2]);
+			if (rows[i].message.indexOf('[name]') 		&& items[a][2]) rows[i].message = rows[i].message.replace('[surname]',items[a][3]);
+			if (rows[i].message.indexOf('[name]') 		&& items[a][2]) rows[i].message = rows[i].message.replace('[id]',items[a][items[a].length-2]);
+			if (rows[i].message.indexOf('[name]') 		&& items[a][2]) rows[i].message = rows[i].message.replace('[login]',items[a][items[a].length-1]);
+			if (rows[i].message.indexOf('[name]') 		&& items[a][2]) rows[i].message = rows[i].message.replace('[signature]',req.body.from_name);
+			if (rows[i].message.indexOf('[name]') 		&& items[a][2]) rows[i].message = rows[i].message+signature;
+			//rows[i].message = req.body["message_"+items[a][0]].replace('[org_name]',items[a][1]).replace('[name]',items[a][2]).replace('[name]',items[a][2]).replace('[surname]',items[a][3]).replace('[id]',items[a][items[a].length-2]).replace('[login]',items[a][items[a].length-1]).replace('[signature]',req.body.from_name)+signature;
 			rows[i].server = {
-				user:    req.body.from_email, 
-				password:req.body.from_password, 
+				user:    req.body.user_email,
+				password:req.body.user_password,
 				host:    "smtp.gmail.com", 
 				ssl:     true
-				
 			}
 		}
         //console.log(rows);

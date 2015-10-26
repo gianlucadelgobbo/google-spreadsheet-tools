@@ -22,10 +22,13 @@ block content
 						input(type="text",placeholder="From name", value=typeof(post)!=="undefined" && post.from_name ? post.from_name : 'Gianluca Del Gobbo', name='from_name')#from_name.form-control
 					p
 						label(for='from_email')="From Email"
-						input(type="email",		placeholder="From Email",	name='from_email', 	 value=typeof(post)!=="undefined" && post.from_email ? post.from_email : 'g.delgobbo@flyer.it')#from_email.form-control
+						input(type="email",        placeholder="From Email",    name='from_email',     value=typeof(post) !== "undefined" && post.from_email ? post.from_email : 'g.delgobbo@flyer.it')#from_email.form-control
 					p
-						label(for='from_password')="From Password"
-						input(type="password",	placeholder="From Password",name='from_password',value=typeof(post)!=="undefined" && post.from_password ? post.from_password : '')#from_password.form-control
+						label(for='user_email')="User Email"
+						input(type="email",        placeholder="User Email",    name='user_email',     value=typeof(post) !== "undefined" && post.user_email ? post.user_email : 'g.delgobbo@flyer.it')#user_email.form-control
+					p
+						label(for='user_password')="User Password"
+						input(type="password",	placeholder="User Password",name='user_password',value=typeof(post)!=="undefined" && post.user_password ? post.user_password : '')#user_password.form-control
 				div.col-sm-6
 					p
 						label(for='subject_add')="Subject"
