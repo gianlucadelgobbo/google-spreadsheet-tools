@@ -1,17 +1,17 @@
 {
   "name": "google-spreadsheet-tools",
-  "version": "0.0.0",
-  "description": "open-source google sheets tools build on node.js",
+  "version": "1.0.0",
+  "description": "Google Spreadsheet Tools =============",
   "main": "app.js",
   "dependencies": {
-    "body-parser": "^1.8.1",
-    "emailjs": "^0.3.11",
-    "express": "^4.8.7",
-    "google-spreadsheet": "^0.2.8",
-    "jade": "^1.6.0",
-    "method-override": "^2.2.0",
+    "body-parser": "^1.14.1",
+    "emailjs": "^1.0.0",
+    "express": "^4.13.3",
+    "google-spreadsheet": "^1.0.1",
+    "jade": "^1.11.0",
     "mpm.shortcode": "0.0.22",
-    "stylus": "^0.48.1"
+    "nodemailer": "^1.10.0",
+    "stylus": "^0.52.4"
   },
   "devDependencies": {},
   "scripts": {
@@ -19,14 +19,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/gianlucadelgobbo/google-spreadsheet-tools.git"
+    "url": "git+https://github.com/gianlucadelgobbo/google-spreadsheet-tools.git"
   },
-  "keywords": [
-    "google-spreadsheet-tools",
-    "node.js"
-  ],
-  "author": "Gianluca Del Gobbo <g.delgobbo@flyer.it>",
-  "license": "BSD",
-  "readmeFilename": "README.md",
-  "private": false
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gianlucadelgobbo/google-spreadsheet-tools/issues"
+  },
+  "homepage": "https://github.com/gianlucadelgobbo/google-spreadsheet-tools#readme"
 }
