@@ -51,11 +51,11 @@ block content
 						textarea(rows="20",name="message_en")#message_en.form-control=(post.message_it ? post.message_en : 'Ciao [name],\n\n\n[signature]')
 			div.text-center
 				button(type='submit').btn.btn-success="Compose"
-			- if ((typeof(failed)!=="undefined" ) && (typeof(success)!=="undefined") && (success[0].length || failed[0].length))
+			- if ((typeof(failed)!=="undefined" ) && (typeof(success)!=="undefined") && (success.length || failed.length))
 				h1="Success"
-				textarea.form-control=success[0].length ? success[0].join(',') : ""
+				textarea.form-control=success.length ? success.join(',') : ""
 				h1="Failed"
-				textarea.form-control=failed[0].length ? failed[0].join(',') : ""
+				textarea.form-control=failed.length ? failed.join(',') : ""
 		- if (typeof(results)!=="undefined" && results.length)
 			input(type="hidden",value=0, name='send')#send
 			ol
@@ -70,7 +70,7 @@ block content
 								p!="CC: <b>"+item.cc_html+"</b>"
 							p!="Subject: <b>"+item.subject+"</b>"
 							p="Message:"
-								pre=item.message
+								pre=item.text
 			div.row
 				div.col-sm-6
 					div.pull-right
