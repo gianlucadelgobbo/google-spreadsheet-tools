@@ -23,33 +23,63 @@ var req;
 
 var finalCallback;
 
+var index;
+var c;
+
 /* Loading modules done. */
 module.exports = massMailer;
 
 function massMailer(r,l,auth,c) {
-    req = r;
-    listofemails = l;
-    finalCallback = c;
-    var self = this;
-    console.log(auth);
-    transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: auth,
-        debug:true
-    });
-    // Fetch all the emails from database and push it in listofemails
-    // Will do it later.
-    self.invokeOperation();
+  req = r;
+  listofemails = l;
+  finalCallback = c;
+  var self = this;
+  index = 0;
+  console.log(auth);
+  console.log(self.sendDelayed);
+  console.log(self.sendDelayed);
+  transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: auth,
+    debug:true
+  });
+  // Fetch all the emails from database and push it in listofemails
+  // Will do it later.
+  c = setTimeout(function () {self.sendDelayed(self);}, 1000);
+  //self.invokeOperation();
 };
 
 /* Invoking email sending operation at once */
 
-massMailer.prototype.invokeOperation = function() {
-    var self = this;
-    async.each(listofemails,self.SendEmail,function(){
-        console.log(success_email);
-        console.log(failure_email);
+massMailer.prototype.sendDelayed = function(self) {
+  clearTimeout(c);
+  if (failure_email.length+success_email.length == listofemails.length) {
+    return finalCallback(req,listofemails,failure_email, success_email);
+  } else {
+    var Email = listofemails[index];
+    transporter.sendMail(Email, function(error, info) {
+      if(error) {
+        console.log(error)
+        failure_email.push(Email);
+      } else {
+        success_email.push(Email);
+      }
+      console.log(success_email);
+      console.log(failure_email);
+      index++;
+      //var self = this;
+      c = setTimeout(function () {self.sendDelayed(self);}, 1000);
     });
+
+  }
+}
+
+massMailer.prototype.invokeOperation = function() {
+  var self = this;
+  async.each(listofemails,self.SendEmail,function(){
+    console.log(success_email);
+    console.log(failure_email);
+  });
 }
 
 /*
