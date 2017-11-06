@@ -117,9 +117,12 @@ exports.post = function get(req, res) {
 				"auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
 				"client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/g-delgobbo%40animated-verve-136223.iam.gserviceaccount.com"
 			}, function(err){
-                my_sheet.getInfo( function( err, sheet_info ){
-                    console.log( sheet_info );
-                    // use worksheet object if you want to forget about ids
+                console.log( err );
+              console.log( my_sheet );
+              my_sheet.getInfo( function( err, sheet_info ){
+                  console.log( sheet_info );
+                  console.log( err );
+                  // use worksheet object if you want to forget about ids
                     sheet_info.worksheets[0].getRows( function( err, rows ){
                         //console.log( Object.keys(fields));
                         //console.log( Object.keys( rows[0] ));

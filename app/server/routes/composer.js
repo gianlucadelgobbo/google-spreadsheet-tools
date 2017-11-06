@@ -1,9 +1,10 @@
 var signatures = {
-	"livecinemafestival.com": "\n______________________________________\nLive Cinema Festival\nlivecinemafestival.com\nVia del Verano 39 - 00185 Rome\nTel. +39 06 78147301 Fax +39 06 78390805",
-	"liveperformersmeeting.net": "\n______________________________________\nLPM - Live Performers Meeting\nliveperformersmeeting.net\nVia del Verano 39 - 00185 Rome\nTel. +39 06 78147301 Fax +39 06 78390805",
-	"flyer.it": "\n______________________________________\nFlyer communication\nflyer.it\nVia del Verano 39 - 00185 Rome\nTel. +39 06 78147301 Fax +39 06 78390805",
-	"avnode.org": "\n______________________________________\nAVnode\navnode.org - avnode.net"
-}
+  "fotonicafestival.com": "\n______________________________________\nFOTONICA Festival\nfotonicafestival.com\nVia del Verano 39 - 00185 Rome\nTel. +39 06 78147301 Fax +39 06 78390805",
+  "livecinemafestival.com": "\n______________________________________\nLive Cinema Festival\nlivecinemafestival.com\nVia del Verano 39 - 00185 Rome\nTel. +39 06 78147301 Fax +39 06 78390805",
+  "liveperformersmeeting.net": "\n______________________________________\nLPM - Live Performers Meeting\nliveperformersmeeting.net\nVia del Verano 39 - 00185 Rome\nTel. +39 06 78147301 Fax +39 06 78390805",
+  "flyer.it": "\n______________________________________\nFlyer communication\nflyer.it\nVia del Verano 39 - 00185 Rome\nTel. +39 06 78147301 Fax +39 06 78390805",
+  "avnode.org": "\n______________________________________\nStichting AVnode\nArondeusstraat 7, 1063GB Amsterdam\navnode.org - avnode.net"
+};
 
 exports.get = function get(req, res) {
 	res.render('composer', {title:"Google Spreadsheet Tools",post:[],results:[],failed:[[],[]], success:[[],[]] });

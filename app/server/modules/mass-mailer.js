@@ -103,8 +103,9 @@ massMailer.prototype.SendEmail = function(Email,callback) {
         function(callback) {
             transporter.sendMail(Email, function(error, info) {
                 if(error) {
-                    console.log(error)
-                    failure_email.push(Email);
+                  console.log(Email)
+                  console.log(error)
+                  failure_email.push(Email);
                 } else {
                     self.status = true;
                     success_email.push(Email);
