@@ -31,6 +31,7 @@ block content
 						ol
 							- each field in fields
 								li=field
+								input(type="hidden" name="fields[]" value=field)
 
 				p
 					label(for='mytext')="My text"
@@ -56,7 +57,7 @@ block content
 			div
 				- strA = []
 				each item in results
-					div=item
+					pre=item
 	br
 
 

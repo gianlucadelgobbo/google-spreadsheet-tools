@@ -6,13 +6,13 @@ exports.get = function get(req, res) {
     res.render('docbuilder', {title:"Google Spreadsheet Tools",post:[],results:[]});
 };
 exports.post = function get(req, res) {
-    var fields = {
-        "display_name": "",
-        "name": "",
+    /*var fields = {
+        "wpcforganisationlegalrepresentativesurname": "",
+        "wpcforganisationlegalrepresentativename": "",
         "surname": "",
         "email": "",
         "lang": ""
-    };
+    };*/
     // console.log(res);
     // without auth -- read only
     // # is worksheet id - IDs start at 1
