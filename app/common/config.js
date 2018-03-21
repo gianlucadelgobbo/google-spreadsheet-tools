@@ -51,5 +51,5 @@ var _config = {
 	"googleAnalytics": "UA-8844617-15"
 }
 if (typeof exports !== "undefined") exports._config = _config;
-//if (GLOBAL) GLOBAL._config = _config;
-//console.log(GLOBAL._config);
+//if (global) global._config = _config;
+//console.log(global._config);

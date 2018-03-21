@@ -1,4 +1,4 @@
-GLOBAL._config = require('./common/config.js')._config;
+global._config = require('./common/config.js')._config;
 var bodyParser = require('body-parser');
 //var methodOverride = require('method-override');
 
