@@ -3,7 +3,7 @@ var signatures = {
   "fotonicafestival.com": "\n______________________________________\nFOTONICA Festival\nfotonicafestival.com\nVia del Verano 39 - 00185 Rome\nTel. +39 06 78147301 Fax +39 06 78390805",
 	"livecinemafestival.com": "\n______________________________________\nLive Cinema Festival\nlivecinemafestival.com\nVia del Verano 39 - 00185 Rome\nTel. +39 06 78147301 Fax +39 06 78390805",
 	"liveperformersmeeting.net": "\n______________________________________\nLPM - Live Performers Meeting\nliveperformersmeeting.net\nVia del Verano 39 - 00185 Rome\nTel. +39 06 78147301 Fax +39 06 78390805",
-	"flyer.it": "\n______________________________________\nFlyer communication\nflyer.it\nVia del Verano 39 - 00185 Rome\nTel. +39 06 78147301 Fax +39 06 78390805",
+	"flyer.it": "\n______________________________________\nFlyer new media\nflyer.it\nVia del Verano 39 - 00185 Rome\nTel. +39 06 78147301 Fax +39 06 78390805",
 	"avnode.org": "\n______________________________________\nAVnode\navnode.org - avnode.net"
 }
 

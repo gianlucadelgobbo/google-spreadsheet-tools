@@ -2,7 +2,7 @@ var signatures = {
   "fotonicafestival.com": "\n______________________________________\nFOTONICA Festival\nfotonicafestival.com\nVia del Verano 39 - 00185 Rome\nTel. +39 06 78147301 Fax +39 06 78390805",
   "livecinemafestival.com": "\n______________________________________\nLive Cinema Festival\nlivecinemafestival.com\nVia del Verano 39 - 00185 Rome\nTel. +39 06 78147301 Fax +39 06 78390805",
   "liveperformersmeeting.net": "\n______________________________________\nLPM - Live Performers Meeting\nliveperformersmeeting.net\nVia del Verano 39 - 00185 Rome\nTel. +39 06 78147301 Fax +39 06 78390805",
-  "flyer.it": "\n______________________________________\nFlyer communication\nflyer.it\nVia del Verano 39 - 00185 Rome\nTel. +39 06 78147301 Fax +39 06 78390805",
+  "flyer.it": "\n______________________________________\nFlyer new media\nflyer.it\nVia del Verano 39 - 00185 Rome\nTel. +39 06 78147301 Fax +39 06 78390805",
   "avnode.org": "\n______________________________________\nStichting AVnode\nArondeusstraat 7, 1063GB Amsterdam\navnode.org - avnode.net"
 };
 
@@ -11,7 +11,7 @@ exports.get = function get(req, res) {
 };
 exports.post = function get(req, res) {
 	// console.log(res);
-	// console.log( req.body);
+	console.log( req.body);
 	if (req.body.to && (req.body.message_it || req.body.message_en)) {
 		var rows = {};
 		var items = JSON.parse(req.body.to);
@@ -29,10 +29,12 @@ exports.post = function get(req, res) {
 			}
 			rows[i].subject = req.body.subject.replace('[org_name]',items[a][1]);
 			rows[i].lang = items[a][0];
+			console.log( rows[i].lang);
 			rows[i].text = req.body["message_"+items[a][0]];
 			if (rows[i].text.indexOf('[org_name]') 	&& items[a][1]) rows[i].text = rows[i].text.replace('[org_name]',items[a][1]);
 			if (rows[i].text.indexOf('[name]') 		&& items[a][2]) rows[i].text = rows[i].text.replace('[name]',items[a][2]);
 			if (rows[i].text.indexOf('[name]') 		&& items[a][2]) rows[i].text = rows[i].text.replace('[name]',items[a][2]);
+			if (rows[i].text.indexOf('[name]') 		&& items[a][2]) rows[i].text = rows[i].text.replace('[email]',items[a][4]);
 			if (rows[i].text.indexOf('[name]') 		&& items[a][2]) rows[i].text = rows[i].text.replace('[surname]',items[a][3]);
 			if (rows[i].text.indexOf('[name]') 		&& items[a][2]) rows[i].text = rows[i].text.replace('[id]',items[a][items[a].length-2]);
 			if (rows[i].text.indexOf('[name]') 		&& items[a][2]) rows[i].text = rows[i].text.replace('[login]',items[a][items[a].length-1]);

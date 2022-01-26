@@ -35,9 +35,9 @@ function massMailer(r,l,auth,c) {
   finalCallback = c;
   var self = this;
   index = 0;
-  console.log(auth);
+/*   console.log(auth);
   console.log(self.sendDelayed);
-  console.log(self.sendDelayed);
+  console.log(self.sendDelayed); */
   transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: auth,

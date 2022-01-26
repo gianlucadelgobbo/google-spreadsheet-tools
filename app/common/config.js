@@ -4,7 +4,7 @@ var _config = {
 	"defaultLocale": 	"it",
 	"company": {
 		"logo":	"/img/logo.png",
-		"name":	"Flyer communication srl",
+		"name":	"Flyer srl impresa sociale",
 		"row1":	"Via del Verano 39, 00185 Roma, Italia<br />t +39.06.78147301 - f +39.06.78390805 - www.flyer.it - flyer@flyer.it",
 		"row2":	"Sede amministrativa: Via Cardinal de Luca, 10 - 00196 Rome, Italy<br />P.IVA 06589171005 - NREA 977098"
 	},
